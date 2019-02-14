@@ -47,6 +47,7 @@
             this.RpcUser_feld = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.RpcPassword_feld = new System.Windows.Forms.TextBox();
+            this.update_button = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // create_masternode
@@ -55,7 +56,7 @@
             this.create_masternode.FlatAppearance.BorderColor = System.Drawing.SystemColors.MenuHighlight;
             this.create_masternode.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.MenuHighlight;
             this.create_masternode.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.create_masternode.Location = new System.Drawing.Point(425, 35);
+            this.create_masternode.Location = new System.Drawing.Point(319, 113);
             this.create_masternode.Name = "create_masternode";
             this.create_masternode.Size = new System.Drawing.Size(334, 44);
             this.create_masternode.TabIndex = 0;
@@ -111,7 +112,7 @@
             // 
             this.password_feld.Location = new System.Drawing.Point(319, 61);
             this.password_feld.Name = "password_feld";
-            this.password_feld.Size = new System.Drawing.Size(100, 20);
+            this.password_feld.Size = new System.Drawing.Size(258, 20);
             this.password_feld.TabIndex = 7;
             // 
             // label5
@@ -137,7 +138,7 @@
             this.check_masternode.Name = "check_masternode";
             this.check_masternode.Size = new System.Drawing.Size(334, 44);
             this.check_masternode.TabIndex = 19;
-            this.check_masternode.Text = "Check Wallet Status";
+            this.check_masternode.Text = "Check Blockcount";
             this.check_masternode.UseVisualStyleBackColor = true;
             this.check_masternode.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -154,7 +155,8 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(698, 173);
+            this.button4.Enabled = false;
+            this.button4.Location = new System.Drawing.Point(583, 63);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(111, 44);
             this.button4.TabIndex = 21;
@@ -170,7 +172,7 @@
             this.log_feld.Name = "log_feld";
             this.log_feld.ReadOnly = true;
             this.log_feld.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.log_feld.Size = new System.Drawing.Size(791, 351);
+            this.log_feld.Size = new System.Drawing.Size(720, 351);
             this.log_feld.TabIndex = 22;
             this.log_feld.Text = "Server Log";
             // 
@@ -222,11 +224,23 @@
             this.RpcPassword_feld.TabIndex = 28;
             this.RpcPassword_feld.Text = "hufwer5er49f3r9wd59fsdfsdDE45vc5asdfjwdi85489";
             // 
+            // update_button
+            // 
+            this.update_button.Enabled = false;
+            this.update_button.Location = new System.Drawing.Point(617, 33);
+            this.update_button.Name = "update_button";
+            this.update_button.Size = new System.Drawing.Size(75, 23);
+            this.update_button.TabIndex = 30;
+            this.update_button.Text = "Update";
+            this.update_button.UseVisualStyleBackColor = true;
+            this.update_button.Click += new System.EventHandler(this.update_button_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(833, 616);
+            this.ClientSize = new System.Drawing.Size(770, 616);
+            this.Controls.Add(this.update_button);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.RpcPassword_feld);
             this.Controls.Add(this.label1);
@@ -274,6 +288,7 @@
         private System.Windows.Forms.TextBox RpcUser_feld;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox RpcPassword_feld;
+        private System.Windows.Forms.Button update_button;
     }
 }
 

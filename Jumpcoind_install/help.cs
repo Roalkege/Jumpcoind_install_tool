@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Jumpcoin_install_win
+namespace Bitradio_masternode_creator
 {
     public partial class help : Form
     {

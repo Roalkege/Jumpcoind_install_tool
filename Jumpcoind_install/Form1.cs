@@ -13,6 +13,8 @@ using Microsoft.VisualBasic;
 using System.IO;
 using System.Diagnostics;
 using System.Collections;
+using System.Net;
+
 
 
 //Thanks to WlanWerner(https://github.com/WlanWerner)
@@ -46,7 +48,7 @@ namespace Jumpcoin_install_win
                       + "Check also my Code(it's open Source) and don't flame I'm a student :D");
         }
 
-        // Install the ./Bitradiod
+        // Install the ./jumpcoind
         private void button1_Click(object sender, EventArgs e)
         {
             new Task(() => RunCommand()).Start();
@@ -153,9 +155,8 @@ namespace Jumpcoin_install_win
 
                 var command = client.CreateCommand("cd ~");
                 var result = command.BeginExecute();
-                command = client.CreateCommand("sudo wget https://raw.githubusercontent.com/Roalkege/jumpcoind-install/master/jumpcoind_install.sh");  //download the script
+                command = client.CreateCommand("sudo wget https://raw.githubusercontent.com/Roalkege/Jumpcoind_install_tool/master/jumpcoind_install.sh");  //download the script
                 result = command.BeginExecute();
-                MessageBox.Show("script erhalten");
                 command = client.CreateCommand("sudo bash jumpcoind_install.sh");  //execute the script
                 result = command.BeginExecute();
 
@@ -180,7 +181,7 @@ namespace Jumpcoin_install_win
                 client.Disconnect();
             }
 
-            
+
             //finish
             //MessageBox.Show("Wallet success full installed.");
 
@@ -212,9 +213,9 @@ namespace Jumpcoin_install_win
         {
             //opens the help form
             //multi-language in future
-            help help = new help();
-            help.ShowDialog();
-            help.Focus();
+
+
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -257,7 +258,7 @@ namespace Jumpcoin_install_win
             password = password_feld.Text;
 
             //login and create connection
-            
+
 
             //using (var client = new SshClient(ip, Convert.ToInt16(port), username, password))
             //{
@@ -300,6 +301,57 @@ namespace Jumpcoin_install_win
         private void label1_Click_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void update_button_Click(object sender, EventArgs e)
+        {
+            //var version_number = "Version 1.0.0";
+            //int c;
+
+
+
+
+            //string result = null;
+            //string url = "https://brocoin.world/Nick/version.txt";
+            //WebResponse response = null;
+            //StreamReader reader = null;
+
+            //try
+            //{
+            //    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            //    request.Method = "GET";
+            //    response = request.GetResponse();
+            //    reader = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
+            //    result = reader.ReadToEnd();
+            //}
+            //catch (Exception ex)
+            //{
+            //    // handle error
+            //    MessageBox.Show(ex.Message);
+            //}
+            //finally
+            //{
+            //    if (reader != null)
+            //        reader.Close();
+            //    if (response != null)
+            //        response.Close();
+            //}
+
+            //c = String.Compare(result, version_number);
+            //MessageBox.Show(Convert.ToString(version_number + " " + result));
+            //if (Convert.ToBoolean(c))
+            //{
+            //    switch (MessageBox.Show("There is a Update available", "Update", MessageBoxButtons.YesNo))
+            //    {
+            //        case DialogResult.Yes: System.Diagnostics.Process.Start("http://google.com"); ; break;
+            //        case DialogResult.No: break;
+            //        case DialogResult.Cancel: break;
+            //    }
+            //}
+            //else
+            //{
+            //    MessageBox.Show("There is no Update available");
+            //}
         }
     }
 }
