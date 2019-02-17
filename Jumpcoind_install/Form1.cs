@@ -45,7 +45,7 @@ namespace Jumpcoin_install_win
                       + "I take no responsibility for lost coins and/or their VPS." + "\r\n"
                       + "I can't get in touch with their coins." + "\r\n"
                       + "Please encrypt your wallet anyway and make a note of your password." + "\r\n"
-                      + "Check also my Code(it's open Source) and don't flame I'm a student :D");
+                      + "Check also my Code(it's open Source) and don't flame I'm a student :D", "Information");
         }
 
         // Install the ./jumpcoind
@@ -260,32 +260,41 @@ namespace Jumpcoin_install_win
             //login and create connection
 
 
-            //using (var client = new SshClient(ip, Convert.ToInt16(port), username, password))
-            //{
-            //    try
-            //    {
-            //        client.Connect();
-            //    }
-            //    catch
-            //    {
-            //        MessageBox.Show("Please fill out the IP, user and password!");  //If can't connect
-            //        return;
-            //    }
+            using (var client = new SshClient(ip, Convert.ToInt16(port), username, password))
+            {
 
-            //    var command = client.CreateCommand("cd ~");
-            //    var result = command.Execute();
-            //    command = client.CreateCommand("./Bitradiod stop");  //stops the node
-            //    result = command.Execute();
-            //    log_feld.Text = result + "/r/n";
-            //    System.Threading.Thread.Sleep(500);
-            //    command = client.CreateCommand("killall ./Bitradiod");  // kills the node process
-            //    result = command.Execute();
-            //    log_feld.Text = result + "/r/n";
-            //    command = client.CreateCommand("./Bitradiod -daemon");  // starts the wallet
-            //    result = command.Execute();
-            //    log_feld.Text = result + "/r/n";
-            //    client.Disconnect();
-            //}
+                switch (MessageBox.Show("Attention this function is still in beta", "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                {
+                    case DialogResult.Yes:
+
+                        try
+                        {
+                            client.Connect();
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Please fill out the IP, user and password!");  //If can't connect
+                            return;
+                        }
+
+                        var command = client.CreateCommand("cd ~");
+                        var result = command.Execute();
+                        command = client.CreateCommand("./jumpcoind stop");  //stops the node
+                        result = command.Execute();
+                        System.Threading.Thread.Sleep(500);
+                        //command = client.CreateCommand("killall ./Bitradiod");  // kills the node process
+                        //result = command.Execute();
+                        command = client.CreateCommand("./jumpcoind");  // starts the wallet
+                        result = command.Execute();
+                        log_feld.Text = "Wallet successful (re)startet";
+                        client.Disconnect();
+                        break;
+
+                    case DialogResult.No: break;
+
+                }
+
+            }
         }
 
         private void startup_checkbox_CheckedChanged(object sender, EventArgs e)
@@ -312,7 +321,7 @@ namespace Jumpcoin_install_win
 
 
             //string result = null;
-            //string url = "https://brocoin.world/Nick/version.txt";
+            //string url = "https://brocoin.world/Nick/version.txt";    //need new https adress to check for new Version
             //WebResponse response = null;
             //StreamReader reader = null;
 
@@ -338,17 +347,15 @@ namespace Jumpcoin_install_win
             //}
 
             //c = String.Compare(result, version_number);
-            //MessageBox.Show(Convert.ToString(version_number + " " + result));
-            //if (Convert.ToBoolean(c))
+            //if (c == -1)
             //{
             //    switch (MessageBox.Show("There is a Update available", "Update", MessageBoxButtons.YesNo))
             //    {
-            //        case DialogResult.Yes: System.Diagnostics.Process.Start("http://google.com"); ; break;
+            //        case DialogResult.Yes: System.Diagnostics.Process.Start("http://jumpcoin.club"); ; break;
             //        case DialogResult.No: break;
-            //        case DialogResult.Cancel: break;
             //    }
             //}
-            //else
+            //else 
             //{
             //    MessageBox.Show("There is no Update available");
             //}
