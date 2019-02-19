@@ -154,7 +154,6 @@
             // 
             // button4
             // 
-            this.button4.Enabled = false;
             this.button4.Location = new System.Drawing.Point(583, 63);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(111, 44);
@@ -178,12 +177,11 @@
             // startup_checkbox
             // 
             this.startup_checkbox.AutoSize = true;
-            this.startup_checkbox.Enabled = false;
             this.startup_checkbox.Location = new System.Drawing.Point(18, 150);
             this.startup_checkbox.Name = "startup_checkbox";
-            this.startup_checkbox.Size = new System.Drawing.Size(274, 17);
+            this.startup_checkbox.Size = new System.Drawing.Size(238, 17);
             this.startup_checkbox.TabIndex = 25;
-            this.startup_checkbox.Text = "Enable wallet startup and cronjob   ***Not enabled***";
+            this.startup_checkbox.Text = "Enable wallet startup and cronjob   ***Beta***";
             this.startup_checkbox.UseVisualStyleBackColor = true;
             this.startup_checkbox.CheckedChanged += new System.EventHandler(this.startup_checkbox_CheckedChanged);
             // 
