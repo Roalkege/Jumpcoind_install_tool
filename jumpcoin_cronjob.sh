@@ -1,5 +1,5 @@
-sudo apt-get install php
-sudo apt-get install cron
+sudo apt-get install php -y
+sudo apt-get install cron -y
 
 cat >/root/jumpcoin_check.php << EOF
 <?php
