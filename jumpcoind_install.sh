@@ -69,6 +69,4 @@ maxconnections=12
 EOF
 cd ~
 echo The Wallet is now starting and you wont see anything below, but the Wallet has started. Just close this terminal and open a new one.
-#execute jumpcoind
-./jumpcoind -daemon
-exit n
+
