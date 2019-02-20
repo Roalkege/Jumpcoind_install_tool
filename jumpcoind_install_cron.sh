@@ -6,8 +6,8 @@ sudo apt-get upgrade -y
 sudo apt-get install software-properties-common -y
 sudo add-apt-repository ppa:bitcoin/bitcoin -y
 sudo apt-get update
-sudo apt-get install php
-sudo apt-get install cron
+sudo apt-get install php -y
+sudo apt-get install cron -y
 
 if [[ `lsb_release -rs` == "17.10"  ]] || [[ `lsb_release -rs` == "18.04"  ]] #Check the Version
 then
