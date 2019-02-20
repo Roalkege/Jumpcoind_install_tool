@@ -49,12 +49,20 @@ namespace Jumpcoin_install_win
                       + "Check also my Code(it's open Source) and don't flame I'm a student :D", "Information");
         }
 
-        // Install the ./jumpcoind
+        /// <summary>
+        /// Start the RunCommand
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// 
         private void button1_Click(object sender, EventArgs e)
         {
             new Task(() => RunCommand()).Start();
         }
 
+        /// <summary>
+        /// Installs the jumpcoind with (if wanted) cronjob 
+        /// </summary>
         private void RunCommand()
         {
 
@@ -70,6 +78,9 @@ namespace Jumpcoin_install_win
             string TEMP_PATH = Path.GetTempPath();
 
 
+            /// <summary>
+            /// The Part with cron
+            /// </summary>
 
             if (startup_checkbox.Checked)
             {
@@ -158,11 +169,10 @@ namespace Jumpcoin_install_win
 
                     client.Connect();
 
-                    var command = client.CreateCommand("cd ~");
+                    var command = client.CreateCommand("./jumpcoind getblockcount");
                     var result = command.BeginExecute();
-                    command = client.CreateCommand("sudo wget https://raw.githubusercontent.com/Roalkege/Jumpcoind_install_tool/master/jumpcoind_install_cron.sh");  //download the script
-                    result = command.BeginExecute();
-                    command = client.CreateCommand("sudo bash jumpcoind_install_cron.sh");  //execute the script
+                    System.Threading.Thread.Sleep(500);
+                    command = client.CreateCommand("sudo wget https://raw.githubusercontent.com/Roalkege/Jumpcoind_install_tool/master/jumpcoind_install_cron.sh && sudo bash jumpcoind_install_cron.sh");  //download the script
                     result = command.BeginExecute();
 
                     //log vps output 
@@ -182,11 +192,16 @@ namespace Jumpcoin_install_win
                     }
 
                     command.EndExecute(result);
-
+                    MessageBox.Show("Wallet installed.");
                     client.Disconnect();
+                    
                 }
             }
 
+
+            /// <summary>
+            /// The Part without cron
+            /// </summary>
             else
             {
 
@@ -275,11 +290,10 @@ namespace Jumpcoin_install_win
 
                     client.Connect();
 
-                    var command = client.CreateCommand("cd ~");
+                    var command = client.CreateCommand("./jumpcoind getblockcount");
                     var result = command.BeginExecute();
-                    command = client.CreateCommand("sudo wget https://raw.githubusercontent.com/Roalkege/Jumpcoind_install_tool/master/jumpcoind_install.sh");  //download the script
-                    result = command.BeginExecute();
-                    command = client.CreateCommand("sudo bash jumpcoind_install.sh");  //execute the script
+                    System.Threading.Thread.Sleep(500);
+                    command = client.CreateCommand("sudo wget https://raw.githubusercontent.com/Roalkege/Jumpcoind_install_tool/master/jumpcoind_install.sh && sudo bash jumpcoind_install.sh");  //download the script
                     result = command.BeginExecute();
 
                     //log vps output 
@@ -301,13 +315,14 @@ namespace Jumpcoin_install_win
                     command.EndExecute(result);
 
                     client.Disconnect();
+                    MessageBox.Show("Wallet installed.");
                 }
 
 
 
 
                 //finish
-                //MessageBox.Show("Wallet success full installed.");
+
             }
         }
 
@@ -342,10 +357,16 @@ namespace Jumpcoin_install_win
 
         }
 
+        /// <summary>
+        /// checks the getblockcount output 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// 
         private void button2_Click(object sender, EventArgs e)
         {
 
-            //checks the output of the masternode
+            //checks the output of the wallet
 
             ip = ip_feld.Text;
             port = port_feld.Text;
@@ -372,7 +393,11 @@ namespace Jumpcoin_install_win
             }
         }
 
-        //Restarts the ./Bitradiod process
+        /// <summary>
+        /// Restarts the jumpcoind process
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void restart_masternode_Click(object sender, EventArgs e)
         {
             //Get the informations
@@ -406,7 +431,7 @@ namespace Jumpcoin_install_win
                         command = client.CreateCommand("./jumpcoind stop");  //stops the node
                         result = command.Execute();
                         System.Threading.Thread.Sleep(500);
-                        //command = client.CreateCommand("killall ./Bitradiod");  // kills the node process
+                        //command = client.CreateCommand("killall ./jumpcoind");  // kills the node process
                         //result = command.Execute();
                         command = client.CreateCommand("./jumpcoind");  // starts the wallet
                         result = command.Execute();
@@ -436,53 +461,58 @@ namespace Jumpcoin_install_win
 
         }
 
+        /// <summary>
+        /// Compares the current Veriosn with the online version
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void update_button_Click(object sender, EventArgs e)
         {
-            //var version_number = "Version 1.0.0";
-            //int c;
+            var version_number = "Version 1.0.0";
+            int c;
 
 
 
 
-            //string result = null;
-            //string url = "https://brocoin.world/Nick/version.txt";    //need new https adress to check for new Version
-            //WebResponse response = null;
-            //StreamReader reader = null;
+            string result = null;
+            string url = "https://brocoin.world/Nick/version.txt";    //need new https adress to check for new Version
+            WebResponse response = null;
+            StreamReader reader = null;
 
-            //try
-            //{
-            //    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            //    request.Method = "GET";
-            //    response = request.GetResponse();
-            //    reader = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
-            //    result = reader.ReadToEnd();
-            //}
-            //catch (Exception ex)
-            //{
-            //    // handle error
-            //    MessageBox.Show(ex.Message);
-            //}
-            //finally
-            //{
-            //    if (reader != null)
-            //        reader.Close();
-            //    if (response != null)
-            //        response.Close();
-            //}
+            try
+            {
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+                request.Method = "GET";
+                response = request.GetResponse();
+                reader = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
+                result = reader.ReadToEnd();
+            }
+            catch (Exception ex)
+            {
+                // handle error
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                if (reader != null)
+                    reader.Close();
+                if (response != null)
+                    response.Close();
+            }
 
-            //c = String.Compare(result, version_number);
-            //if (c == -1)
-            //{
-            //    switch (MessageBox.Show("There is a Update available", "Update", MessageBoxButtons.YesNo))
-            //    {
-            //        case DialogResult.Yes: System.Diagnostics.Process.Start("http://jumpcoin.club"); ; break;
-            //        case DialogResult.No: break;
-            //    }
-            //}
-            //else 
-            //{
-            //    MessageBox.Show("There is no Update available");
-            //}
+            c = String.Compare(result, version_number);
+            if (c == -1)
+            {
+                switch (MessageBox.Show("There is a Update available", "Update", MessageBoxButtons.YesNo))
+                {
+                    case DialogResult.Yes: System.Diagnostics.Process.Start("http://jumpcoin.club"); ; break;
+                    case DialogResult.No: break;
+                }
+            }
+            else
+            {
+                MessageBox.Show("There is no Update available");
+            }
         }
 
         private void button1_Click_1(object sender, EventArgs e)
