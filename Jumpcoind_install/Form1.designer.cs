@@ -56,7 +56,7 @@
             this.create_masternode.FlatAppearance.BorderColor = System.Drawing.SystemColors.MenuHighlight;
             this.create_masternode.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.MenuHighlight;
             this.create_masternode.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.create_masternode.Location = new System.Drawing.Point(319, 113);
+            this.create_masternode.Location = new System.Drawing.Point(359, 100);
             this.create_masternode.Name = "create_masternode";
             this.create_masternode.Size = new System.Drawing.Size(334, 44);
             this.create_masternode.TabIndex = 0;
@@ -66,7 +66,7 @@
             // 
             // ip_feld
             // 
-            this.ip_feld.Location = new System.Drawing.Point(100, 35);
+            this.ip_feld.Location = new System.Drawing.Point(101, 22);
             this.ip_feld.Name = "ip_feld";
             this.ip_feld.Size = new System.Drawing.Size(100, 20);
             this.ip_feld.TabIndex = 1;
@@ -75,7 +75,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 38);
+            this.label2.Location = new System.Drawing.Point(16, 25);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(79, 13);
             this.label2.TabIndex = 4;
@@ -84,7 +84,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(26, 64);
+            this.label3.Location = new System.Drawing.Point(27, 51);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(55, 13);
             this.label3.TabIndex = 6;
@@ -93,7 +93,7 @@
             // 
             // username_feld
             // 
-            this.username_feld.Location = new System.Drawing.Point(100, 61);
+            this.username_feld.Location = new System.Drawing.Point(101, 48);
             this.username_feld.Name = "username_feld";
             this.username_feld.Size = new System.Drawing.Size(100, 20);
             this.username_feld.TabIndex = 5;
@@ -102,7 +102,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(230, 64);
+            this.label4.Location = new System.Drawing.Point(231, 51);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(78, 13);
             this.label4.TabIndex = 8;
@@ -110,7 +110,7 @@
             // 
             // password_feld
             // 
-            this.password_feld.Location = new System.Drawing.Point(319, 61);
+            this.password_feld.Location = new System.Drawing.Point(320, 48);
             this.password_feld.Name = "password_feld";
             this.password_feld.Size = new System.Drawing.Size(258, 20);
             this.password_feld.TabIndex = 7;
@@ -118,7 +118,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(249, 38);
+            this.label5.Location = new System.Drawing.Point(250, 25);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(59, 13);
             this.label5.TabIndex = 10;
@@ -126,7 +126,7 @@
             // 
             // port_feld
             // 
-            this.port_feld.Location = new System.Drawing.Point(319, 35);
+            this.port_feld.Location = new System.Drawing.Point(320, 22);
             this.port_feld.Name = "port_feld";
             this.port_feld.Size = new System.Drawing.Size(100, 20);
             this.port_feld.TabIndex = 9;
@@ -134,7 +134,7 @@
             // 
             // check_masternode
             // 
-            this.check_masternode.Location = new System.Drawing.Point(18, 173);
+            this.check_masternode.Location = new System.Drawing.Point(19, 150);
             this.check_masternode.Name = "check_masternode";
             this.check_masternode.Size = new System.Drawing.Size(334, 44);
             this.check_masternode.TabIndex = 19;
@@ -144,7 +144,7 @@
             // 
             // restart_masternode
             // 
-            this.restart_masternode.Location = new System.Drawing.Point(358, 173);
+            this.restart_masternode.Location = new System.Drawing.Point(359, 150);
             this.restart_masternode.Name = "restart_masternode";
             this.restart_masternode.Size = new System.Drawing.Size(334, 44);
             this.restart_masternode.TabIndex = 20;
@@ -154,7 +154,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(583, 63);
+            this.button4.Location = new System.Drawing.Point(584, 50);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(111, 44);
             this.button4.TabIndex = 21;
@@ -164,20 +164,20 @@
             // 
             // log_feld
             // 
-            this.log_feld.Location = new System.Drawing.Point(18, 253);
+            this.log_feld.Location = new System.Drawing.Point(19, 200);
             this.log_feld.MaxLength = 2147483647;
             this.log_feld.Multiline = true;
             this.log_feld.Name = "log_feld";
             this.log_feld.ReadOnly = true;
             this.log_feld.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.log_feld.Size = new System.Drawing.Size(720, 351);
+            this.log_feld.Size = new System.Drawing.Size(674, 351);
             this.log_feld.TabIndex = 22;
             this.log_feld.Text = "Server Log";
             // 
             // startup_checkbox
             // 
             this.startup_checkbox.AutoSize = true;
-            this.startup_checkbox.Location = new System.Drawing.Point(18, 150);
+            this.startup_checkbox.Location = new System.Drawing.Point(19, 115);
             this.startup_checkbox.Name = "startup_checkbox";
             this.startup_checkbox.Size = new System.Drawing.Size(238, 17);
             this.startup_checkbox.TabIndex = 25;
@@ -188,7 +188,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(26, 90);
+            this.label1.Location = new System.Drawing.Point(27, 77);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(49, 13);
             this.label1.TabIndex = 27;
@@ -197,7 +197,7 @@
             // 
             // RpcUser_feld
             // 
-            this.RpcUser_feld.Location = new System.Drawing.Point(100, 87);
+            this.RpcUser_feld.Location = new System.Drawing.Point(101, 74);
             this.RpcUser_feld.Name = "RpcUser_feld";
             this.RpcUser_feld.Size = new System.Drawing.Size(100, 20);
             this.RpcUser_feld.TabIndex = 26;
@@ -207,7 +207,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(235, 90);
+            this.label6.Location = new System.Drawing.Point(236, 77);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(73, 13);
             this.label6.TabIndex = 29;
@@ -215,7 +215,7 @@
             // 
             // RpcPassword_feld
             // 
-            this.RpcPassword_feld.Location = new System.Drawing.Point(319, 87);
+            this.RpcPassword_feld.Location = new System.Drawing.Point(320, 74);
             this.RpcPassword_feld.Name = "RpcPassword_feld";
             this.RpcPassword_feld.Size = new System.Drawing.Size(258, 20);
             this.RpcPassword_feld.TabIndex = 28;
@@ -224,9 +224,9 @@
             // update_button
             // 
             this.update_button.Enabled = false;
-            this.update_button.Location = new System.Drawing.Point(617, 33);
+            this.update_button.Location = new System.Drawing.Point(584, 20);
             this.update_button.Name = "update_button";
-            this.update_button.Size = new System.Drawing.Size(75, 23);
+            this.update_button.Size = new System.Drawing.Size(109, 23);
             this.update_button.TabIndex = 30;
             this.update_button.Text = "Update";
             this.update_button.UseVisualStyleBackColor = true;
@@ -236,7 +236,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(770, 616);
+            this.ClientSize = new System.Drawing.Size(719, 561);
             this.Controls.Add(this.update_button);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.RpcPassword_feld);
