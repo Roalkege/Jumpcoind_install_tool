@@ -8,18 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Bitradio_masternode_creator
+namespace Jumpcoind_install
 {
-    public partial class help : Form
+    public partial class Help : Form
     {
-        public help()
+        public Help()
         {
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void close_button_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
     }
 }

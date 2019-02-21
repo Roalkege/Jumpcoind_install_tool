@@ -348,12 +348,17 @@ namespace Jumpcoin_install_win
 
         }
 
+        /// <summary>
+        /// Opens a new Form with Informations
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button4_Click(object sender, EventArgs e)
         {
             //opens the help form
             //multi-language in future
-            MessageBox.Show("Sometime the Installer doesn't work so please wait up to 10sec and click Install again. I will fix it!");
-
+            Jumpcoind_install.Help newForm2 = new Jumpcoind_install.Help();
+            newForm2.ShowDialog();
 
         }
 
