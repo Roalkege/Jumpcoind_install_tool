@@ -37,16 +37,17 @@
             // 
             this.label1.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 42);
+            this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(736, 156);
+            this.label1.Size = new System.Drawing.Size(730, 156);
             this.label1.TabIndex = 0;
             this.label1.Text = resources.GetString("label1.Text");
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // close_button
             // 
             this.close_button.AutoSize = true;
-            this.close_button.Location = new System.Drawing.Point(12, 213);
+            this.close_button.Location = new System.Drawing.Point(12, 194);
             this.close_button.Name = "close_button";
             this.close_button.Size = new System.Drawing.Size(124, 26);
             this.close_button.TabIndex = 1;
@@ -58,7 +59,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(772, 261);
+            this.ClientSize = new System.Drawing.Size(772, 232);
             this.Controls.Add(this.close_button);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

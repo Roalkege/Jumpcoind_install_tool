@@ -121,7 +121,7 @@
     <value>You need a VPS
 
 You have to fill out IP, User (default: root) and password. This is needed to connect to your VPS.
-When you want to install a new Wallet than check (if you want) the checkbox for the cronjob. The cronjob checks every five minutes if the wallet running.0
+When you want to install a new Wallet than check (if you want) the checkbox for the cronjob. The cronjob checks every five minutes if the wallet running.
 Change the RpcUser and RpcPassword and safe the input if you want to setup a faucet.
 
 When you want to check the wallet or restart the wallet you have only to type in your IP, User and passwort.

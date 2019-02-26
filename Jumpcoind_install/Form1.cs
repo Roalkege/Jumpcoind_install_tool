@@ -14,6 +14,7 @@ using System.IO;
 using System.Diagnostics;
 using System.Collections;
 using System.Net;
+using System.Globalization;
 
 
 
@@ -36,17 +37,39 @@ namespace Jumpcoin_install_win
         public string rpcuser;
         public string rpcpassword;
         public Int16 test = 0;
-
+        public string language_info;
 
         public Form1()
         {
             InitializeComponent();
-            MessageBox.Show("I take no responsibility for this program." + "\r\n"
-                      + "Use this program with caution." + "\r\n"
-                      + "I take no responsibility for lost coins and/or their VPS." + "\r\n"
-                      + "I can't get in touch with their coins." + "\r\n"
-                      + "Please encrypt your wallet anyway and make a note of your password." + "\r\n"
-                      + "Check also my Code(it's open Source) and don't flame I'm a student :D", "Information");
+
+            language_info = System.Globalization.CultureInfo.CurrentCulture.ThreeLetterISOLanguageName;     //get system language
+            if (language_info == "deu")     //Only German and English
+            {
+                MessageBox.Show("Ich übernehme keine Verantwortung für dieses Programm." + "\r\n"
+                      + "Verwenden Sie dieses Programm mit Vorsicht." + "\r\n"
+                      + "Ich übernehme keine Verantwortung für verlorene Jumps und/oder für Ihren VPS." + "\r\n"
+                      + "Ich komme keineswegs in kontakt mit Ihren Jumps." + "\r\n"
+                      + "Bitte verschlüsseln Sie Ihre Wallet trotzdem und notieren Sie sich Ihr Passwort." + "\r\n"
+                      + "Überprüfen Sie auch meinen Code(es ist Open Source) und flammen Sie nicht ich bin ein Schüler :D", "Information");
+                this.check_masternode.Text = "Blockhöhe überprüfen";
+                this.label4.Text = "Serverpasswort";
+                this.label3.Text = "Benutzername";
+                this.label2.Text = "Serveradresse";
+                this.create_masternode.Text = "Installiere Wallet";
+                this.restart_masternode.Text = "Wallet (neu)starten   ***Beta***";
+                this.button4.Text = "Hilfe";
+                this.startup_checkbox.Text = "Starte Wallet beim Hochfahren   ***Beta***";
+                this.Text = "JUMP Wallet Installierer";
+            }
+            else
+                MessageBox.Show("I take no responsibility for this program." + "\r\n"
+                          + "Use this program with caution." + "\r\n"
+                          + "I take no responsibility for lost coins and/or their VPS." + "\r\n"
+                          + "I can't get in touch with their coins." + "\r\n"
+                          + "Please encrypt your wallet anyway and make a note of your password." + "\r\n"
+                          + "Check also my Code(it's open Source) and don't flame I'm a student :D", "Information");
+
         }
 
         /// <summary>
@@ -94,7 +117,10 @@ namespace Jumpcoin_install_win
                     }
                     catch
                     {
-                        MessageBox.Show("Please fill out the IP, user, password, rpcuser and rpcpassword!");  //if not
+                        if (language_info == "deu")
+                            MessageBox.Show("Bitte fülle die Felder IP, Benutzername, Benutzerpasswort, rcuser und rpcpasswort aus!");
+                        else
+                            MessageBox.Show("Please fill out the IP, user, password, rpcuser and rpcpassword!");  //if not
                         return;
                     }
 
@@ -192,9 +218,12 @@ namespace Jumpcoin_install_win
                     }
 
                     command.EndExecute(result);
+                    if (language_info == "deu")
+                        MessageBox.Show("Wallet installiert.");
+                    else
                     MessageBox.Show("Wallet installed.");
                     client.Disconnect();
-                    
+
                 }
             }
 
@@ -215,6 +244,9 @@ namespace Jumpcoin_install_win
                     }
                     catch
                     {
+                        if (language_info == "deu")
+                            MessageBox.Show("Bitte fülle die Felder IP, Benutzername, Benutzerpasswort, rcuser und rpcpasswort aus!");
+                        else
                         MessageBox.Show("Please fill out the IP, user, password, rpcuser and rpcpassword!");  //if not
                         return;
                     }
@@ -315,6 +347,9 @@ namespace Jumpcoin_install_win
                     command.EndExecute(result);
 
                     client.Disconnect();
+                    if (language_info == "deu")
+                        MessageBox.Show("Wallet installiert.");
+                    else
                     MessageBox.Show("Wallet installed.");
                 }
 
@@ -357,6 +392,7 @@ namespace Jumpcoin_install_win
         {
             //opens the help form
             //multi-language in future
+            //english and german support ^^
             Jumpcoind_install.Help newForm2 = new Jumpcoind_install.Help();
             newForm2.ShowDialog();
 
@@ -387,6 +423,9 @@ namespace Jumpcoin_install_win
                 }
                 catch
                 {
+                    if (language_info == "deu")
+                        MessageBox.Show("Bitte fülle die Felder IP, Benutzername und Benutzerpasswort aus!");
+                    else
                     MessageBox.Show("Please fill out the IP, user and password!"); //If can't connect
                     return;
                 }
@@ -427,6 +466,8 @@ namespace Jumpcoin_install_win
                         }
                         catch
                         {
+                            if (language_info == "deu")
+                                MessageBox.Show("Bitte fülle die Felder IP, Benutzername und Benutzerpasswort aus!");
                             MessageBox.Show("Please fill out the IP, user and password!");  //If can't connect
                             return;
                         }
@@ -440,7 +481,10 @@ namespace Jumpcoin_install_win
                         //result = command.Execute();
                         command = client.CreateCommand("./jumpcoind");  // starts the wallet
                         result = command.Execute();
-                        log_feld.Text = "Wallet successful (re)startet";
+                        if (language_info == "deu")
+                            log_feld.Text = "Wallet erfolgreich neugestartet";
+                        else
+                            log_feld.Text = "Wallet successful (re)startet";
                         client.Disconnect();
                         break;
 
@@ -508,15 +552,27 @@ namespace Jumpcoin_install_win
             c = String.Compare(result, version_number);
             if (c == -1)
             {
-                switch (MessageBox.Show("There is a Update available", "Update", MessageBoxButtons.YesNo))
-                {
-                    case DialogResult.Yes: System.Diagnostics.Process.Start("http://jumpcoin.club"); ; break;
-                    case DialogResult.No: break;
-                }
+                if (language_info == "deu")
+                    switch (MessageBox.Show("Es ist ein Update verfügbar", "Update", MessageBoxButtons.YesNo))
+
+                    {
+                        case DialogResult.Yes: System.Diagnostics.Process.Start("http://jumpcoin.club"); ; break;
+                        case DialogResult.No: break;
+                    }
+                else
+                    switch (MessageBox.Show("There is a update available", "Update", MessageBoxButtons.YesNo))
+
+                    {
+                        case DialogResult.Yes: System.Diagnostics.Process.Start("http://jumpcoin.club"); ; break;
+                        case DialogResult.No: break;
+                    }
             }
             else
             {
-                MessageBox.Show("There is no Update available");
+                if (language_info == "deu")
+                    MessageBox.Show("Kein Update verfügbar");
+                else
+                    MessageBox.Show("No update available");
             }
         }
 
@@ -528,6 +584,11 @@ namespace Jumpcoin_install_win
             }
             else
                 MessageBox.Show("false");
+        }
+
+        private void langauge_label_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -84,7 +84,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(27, 51);
+            this.label3.Location = new System.Drawing.Point(16, 51);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(55, 13);
             this.label3.TabIndex = 6;
@@ -188,7 +188,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(27, 77);
+            this.label1.Location = new System.Drawing.Point(22, 77);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(49, 13);
             this.label1.TabIndex = 27;
@@ -223,10 +223,9 @@
             // 
             // update_button
             // 
-            this.update_button.Enabled = false;
             this.update_button.Location = new System.Drawing.Point(584, 20);
             this.update_button.Name = "update_button";
-            this.update_button.Size = new System.Drawing.Size(109, 23);
+            this.update_button.Size = new System.Drawing.Size(111, 23);
             this.update_button.TabIndex = 30;
             this.update_button.Text = "Update";
             this.update_button.UseVisualStyleBackColor = true;
@@ -258,7 +257,7 @@
             this.Controls.Add(this.create_masternode);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "JUMP wallet installer";
+            this.Text = "JUMP Wallet installer";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
