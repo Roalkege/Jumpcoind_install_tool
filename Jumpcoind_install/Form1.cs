@@ -221,7 +221,7 @@ namespace Jumpcoin_install_win
                     if (language_info == "deu")
                         MessageBox.Show("Wallet installiert.");
                     else
-                    MessageBox.Show("Wallet installed.");
+                        MessageBox.Show("Wallet installed.");
                     client.Disconnect();
 
                 }
@@ -247,7 +247,7 @@ namespace Jumpcoin_install_win
                         if (language_info == "deu")
                             MessageBox.Show("Bitte fülle die Felder IP, Benutzername, Benutzerpasswort, rcuser und rpcpasswort aus!");
                         else
-                        MessageBox.Show("Please fill out the IP, user, password, rpcuser and rpcpassword!");  //if not
+                            MessageBox.Show("Please fill out the IP, user, password, rpcuser and rpcpassword!");  //if not
                         return;
                     }
 
@@ -350,7 +350,7 @@ namespace Jumpcoin_install_win
                     if (language_info == "deu")
                         MessageBox.Show("Wallet installiert.");
                     else
-                    MessageBox.Show("Wallet installed.");
+                        MessageBox.Show("Wallet installed.");
                 }
 
 
@@ -426,7 +426,7 @@ namespace Jumpcoin_install_win
                     if (language_info == "deu")
                         MessageBox.Show("Bitte fülle die Felder IP, Benutzername und Benutzerpasswort aus!");
                     else
-                    MessageBox.Show("Please fill out the IP, user and password!"); //If can't connect
+                        MessageBox.Show("Please fill out the IP, user and password!"); //If can't connect
                     return;
                 }
 
@@ -468,7 +468,8 @@ namespace Jumpcoin_install_win
                         {
                             if (language_info == "deu")
                                 MessageBox.Show("Bitte fülle die Felder IP, Benutzername und Benutzerpasswort aus!");
-                            MessageBox.Show("Please fill out the IP, user and password!");  //If can't connect
+                            else
+                                MessageBox.Show("Please fill out the IP, user and password!");  //If can't connect
                             return;
                         }
 
@@ -552,14 +553,14 @@ namespace Jumpcoin_install_win
             c = String.Compare(result, version_number);
             if (c == -1)
             {
-                if (language_info == "deu")
-                    switch (MessageBox.Show("Es ist ein Update verfügbar", "Update", MessageBoxButtons.YesNo))
+                    if (language_info == "deu")
+                        switch (MessageBox.Show("Es ist ein Update verfügbar", "Update", MessageBoxButtons.YesNo))
 
-                    {
-                        case DialogResult.Yes: System.Diagnostics.Process.Start("http://jumpcoin.club"); ; break;
-                        case DialogResult.No: break;
-                    }
-                else
+                        {
+                            case DialogResult.Yes: System.Diagnostics.Process.Start("http://jumpcoin.club"); ; break;
+                            case DialogResult.No: break;
+                        }
+                    else
                     switch (MessageBox.Show("There is a update available", "Update", MessageBoxButtons.YesNo))
 
                     {
