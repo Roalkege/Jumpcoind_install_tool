@@ -518,7 +518,7 @@ namespace Jumpcoin_install_win
         /// <param name="e"></param>
         private void update_button_Click(object sender, EventArgs e)
         {
-            var version_number = "Version 1.0.0";
+            var version_number = "Version 1.1.0";
             int c;
 
 
