@@ -13,6 +13,7 @@ namespace Jumpcoind_install
     public partial class Help : Form
     {
         public string language_info;
+
         public Help()
         {
             InitializeComponent();
@@ -21,6 +22,7 @@ namespace Jumpcoind_install
             {
                 this.Name = "Hilfe";
                 this.Text = "Hilfe";
+                this.donate_button.Text = "Spenden";
                 this.close_button.Text = "Schließe Fenster";
                 this.label1.Text = "Sie benötigen ein VPS" + "\r\n" + "\r\n"
                       + "Du musst  die Felder IP, Benutzername (Standard: root) und Benutzerpasswort ausfüllen." + "\r\n"
@@ -45,6 +47,12 @@ namespace Jumpcoind_install
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void donate_button_Click(object sender, EventArgs e)
+        {
+            Jumpcoind_install.donate_form newForm2 = new Jumpcoind_install.donate_form();
+            newForm2.ShowDialog();
         }
     }
 }
