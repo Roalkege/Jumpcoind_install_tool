@@ -105,258 +105,134 @@ namespace Jumpcoin_install_win
             /// The Part with cron
             /// </summary>
 
-            if (startup_checkbox.Checked)
+            using (var client = new SshClient(ip, Convert.ToInt16(port), username, password))
             {
-                using (var client = new SshClient(ip, Convert.ToInt16(port), username, password))
-                {
 
-                    // check if everything givem
-                    try
-                    {
-                        client.Connect();
-                    }
-                    catch
-                    {
-                        if (language_info == "deu")
-                            MessageBox.Show("Bitte fülle die Felder IP, Benutzername, Benutzerpasswort, rcuser und rpcpasswort aus!");
-                        else
-                            MessageBox.Show("Please fill out the IP, user, password, rpcuser and rpcpassword!");  //if not
-                        return;
-                    }
-
-
-                    // Crappy way!! I don't know how to transfer a lokal variable to the vps. So I create lokal a file with the genkey as name, upload it 
-                    // to the vps and read the new created directory. The output is the genkey :D
-
-                    var command = client.CreateCommand("mkdir /root/temp_jumpcoin_user/");
-                    var result = command.BeginExecute();
-                    command = client.CreateCommand("mkdir /root/temp_jumpcoin_password/");
-                    result = command.BeginExecute();
-
-                    //create the lokale file
-                    if (!File.Exists(TEMP_PATH + rpcuser))
-                    {
-                        using (StreamWriter sw = new StreamWriter(Environment.ExpandEnvironmentVariables(TEMP_PATH + rpcuser), true))
-                        {
-
-                        }
-                    }
-
-                    if (!File.Exists(TEMP_PATH + rpcpassword))
-                    {
-                        using (StreamWriter sw = new StreamWriter(Environment.ExpandEnvironmentVariables(TEMP_PATH + rpcpassword), true))
-                        {
-
-                        }
-                    }
-                    client.Disconnect();
-                }
-
-                using (var client = new SftpClient(ip, Convert.ToInt16(port), username, password))
+                // check if everything givem
+                try
                 {
                     client.Connect();
-
-                    FileInfo f = new FileInfo(TEMP_PATH + rpcuser);
-                    string uploadfile = f.FullName;
-
-                    var fileStream = new FileStream(uploadfile, FileMode.Open);
-                    if (fileStream != null)
-                    {
-
-                        client.UploadFile(fileStream, "/root/temp_jumpcoin_password/" + f.Name, null);
-                        client.Disconnect();
-                        client.Dispose();
-                    }
                 }
-
-                using (var client = new SftpClient(ip, Convert.ToInt16(port), username, password))
+                catch
                 {
-                    client.Connect();
-
-                    FileInfo f = new FileInfo(TEMP_PATH + rpcpassword);
-                    string uploadfile = f.FullName;
-
-                    var fileStream = new FileStream(uploadfile, FileMode.Open);
-                    if (fileStream != null)
-                    {
-
-                        client.UploadFile(fileStream, "/root/temp_jumpcoin_user/" + f.Name, null);
-                        client.Disconnect();
-                        client.Dispose();
-                    }
-                }
-
-
-
-                // execute the ./jumpcoind install script (self-made)
-
-                using (var client = new SshClient(ip, Convert.ToInt16(port), username, password))
-                {
-
-                    client.Connect();
-
-                    var command = client.CreateCommand("./jumpcoind getblockcount");
-                    var result = command.BeginExecute();
-                    System.Threading.Thread.Sleep(500);
-                    command = client.CreateCommand("sudo wget https://raw.githubusercontent.com/Roalkege/Jumpcoind_install_tool/master/jumpcoind_install_cron.sh && sudo bash jumpcoind_install_cron.sh");  //download the script
-                    result = command.BeginExecute();
-
-                    //log vps output 
-                    using (var reader =
-                       new StreamReader(command.OutputStream, Encoding.UTF8, true, 1024, true))
-                    {
-                        while (!result.IsCompleted || !reader.EndOfStream)
-                        {
-                            string line = reader.ReadLine();
-                            if (line != null)
-                            {
-                                log_feld.Invoke(
-                                    (MethodInvoker)(() =>
-                                        log_feld.AppendText(line + Environment.NewLine)));
-                            }
-                        }
-                    }
-
-                    command.EndExecute(result);
                     if (language_info == "deu")
-                        MessageBox.Show("Wallet installiert.");
+                        MessageBox.Show("Bitte fülle die Felder IP, Benutzername, Benutzerpasswort, rcuser und rpcpasswort aus!");
                     else
-                        MessageBox.Show("Wallet installed.");
-                    client.Disconnect();
+                        MessageBox.Show("Please fill out the IP, user, password, rpcuser and rpcpassword!");  //if not
+                    return;
+                }
 
+
+                // Crappy way!! I don't know how to transfer a lokal variable to the vps. So I create lokal a file with the genkey as name, upload it 
+                // to the vps and read the new created directory. The output is the genkey :D
+
+                var command = client.CreateCommand("mkdir /root/temp_jumpcoin_user/");
+                var result = command.BeginExecute();
+                command = client.CreateCommand("mkdir /root/temp_jumpcoin_password/");
+                result = command.BeginExecute();
+
+                //create the lokale file
+                if (!File.Exists(TEMP_PATH + rpcuser))
+                {
+                    using (StreamWriter sw = new StreamWriter(Environment.ExpandEnvironmentVariables(TEMP_PATH + rpcuser), true))
+                    {
+
+                    }
+                }
+
+                if (!File.Exists(TEMP_PATH + rpcpassword))
+                {
+                    using (StreamWriter sw = new StreamWriter(Environment.ExpandEnvironmentVariables(TEMP_PATH + rpcpassword), true))
+                    {
+
+                    }
+                }
+                client.Disconnect();
+            }
+
+            using (var client = new SftpClient(ip, Convert.ToInt16(port), username, password))
+            {
+                client.Connect();
+
+                FileInfo f = new FileInfo(TEMP_PATH + rpcuser);
+                string uploadfile = f.FullName;
+
+                var fileStream = new FileStream(uploadfile, FileMode.Open);
+                if (fileStream != null)
+                {
+
+                    client.UploadFile(fileStream, "/root/temp_jumpcoin_password/" + f.Name, null);
+                    client.Disconnect();
+                    client.Dispose();
+                }
+            }
+
+            using (var client = new SftpClient(ip, Convert.ToInt16(port), username, password))
+            {
+                client.Connect();
+
+                FileInfo f = new FileInfo(TEMP_PATH + rpcpassword);
+                string uploadfile = f.FullName;
+
+                var fileStream = new FileStream(uploadfile, FileMode.Open);
+                if (fileStream != null)
+                {
+
+                    client.UploadFile(fileStream, "/root/temp_jumpcoin_user/" + f.Name, null);
+                    client.Disconnect();
+                    client.Dispose();
                 }
             }
 
 
-            /// <summary>
-            /// The Part without cron
-            /// </summary>
-            else
+
+            // execute the ./jumpcoind install script (self-made)
+
+            using (var client = new SshClient(ip, Convert.ToInt16(port), username, password))
             {
 
-                using (var client = new SshClient(ip, Convert.ToInt16(port), username, password))
+                client.Connect();
+
+                var command = client.CreateCommand("./jumpcoind getblockcount");
+                var result = command.BeginExecute();
+                System.Threading.Thread.Sleep(500);
+
+                if (startup_checkbox.Checked)   //With Cron
                 {
-
-                    // check if everything givem
-                    try
-                    {
-                        client.Connect();
-                    }
-                    catch
-                    {
-                        if (language_info == "deu")
-                            MessageBox.Show("Bitte fülle die Felder IP, Benutzername, Benutzerpasswort, rcuser und rpcpasswort aus!");
-                        else
-                            MessageBox.Show("Please fill out the IP, user, password, rpcuser and rpcpassword!");  //if not
-                        return;
-                    }
-
-
-                    // Crappy way!! I don't know how to transfer a lokal variable to the vps. So I create lokal a file with the genkey as name, upload it 
-                    // to the vps and read the new created directory. The output is the genkey :D
-
-                    var command = client.CreateCommand("mkdir /root/temp_jumpcoin_user/");
-                    var result = command.BeginExecute();
-                    command = client.CreateCommand("mkdir /root/temp_jumpcoin_password/");
+                    command = client.CreateCommand("sudo wget https://raw.githubusercontent.com/Roalkege/Jumpcoind_install_tool/master/jumpcoind_install_cron.sh && sudo bash jumpcoind_install_cron.sh");  //download the script
                     result = command.BeginExecute();
-
-                    //create the lokale file
-                    if (!File.Exists(TEMP_PATH + rpcuser))
-                    {
-                        using (StreamWriter sw = new StreamWriter(Environment.ExpandEnvironmentVariables(TEMP_PATH + rpcuser), true))
-                        {
-
-                        }
-                    }
-
-                    if (!File.Exists(TEMP_PATH + rpcpassword))
-                    {
-                        using (StreamWriter sw = new StreamWriter(Environment.ExpandEnvironmentVariables(TEMP_PATH + rpcpassword), true))
-                        {
-
-                        }
-                    }
-                    client.Disconnect();
                 }
-
-                using (var client = new SftpClient(ip, Convert.ToInt16(port), username, password))
+                else
                 {
-                    client.Connect();
-
-                    FileInfo f = new FileInfo(TEMP_PATH + rpcuser);
-                    string uploadfile = f.FullName;
-
-                    var fileStream = new FileStream(uploadfile, FileMode.Open);
-                    if (fileStream != null)
-                    {
-
-                        client.UploadFile(fileStream, "/root/temp_jumpcoin_password/" + f.Name, null);
-                        client.Disconnect();
-                        client.Dispose();
-                    }
+                    //without cron
                 }
-
-                using (var client = new SftpClient(ip, Convert.ToInt16(port), username, password))
                 {
-                    client.Connect();
-
-                    FileInfo f = new FileInfo(TEMP_PATH + rpcpassword);
-                    string uploadfile = f.FullName;
-
-                    var fileStream = new FileStream(uploadfile, FileMode.Open);
-                    if (fileStream != null)
-                    {
-
-                        client.UploadFile(fileStream, "/root/temp_jumpcoin_user/" + f.Name, null);
-                        client.Disconnect();
-                        client.Dispose();
-                    }
-                }
-
-
-
-                // execute the ./jumpcoind install script (self-made)
-
-                using (var client = new SshClient(ip, Convert.ToInt16(port), username, password))
-                {
-
-                    client.Connect();
-
-                    var command = client.CreateCommand("./jumpcoind getblockcount");
-                    var result = command.BeginExecute();
-                    System.Threading.Thread.Sleep(500);
                     command = client.CreateCommand("sudo wget https://raw.githubusercontent.com/Roalkege/Jumpcoind_install_tool/master/jumpcoind_install.sh && sudo bash jumpcoind_install.sh");  //download the script
                     result = command.BeginExecute();
-
-                    //log vps output 
-                    using (var reader =
-                       new StreamReader(command.OutputStream, Encoding.UTF8, true, 1024, true))
-                    {
-                        while (!result.IsCompleted || !reader.EndOfStream)
-                        {
-                            string line = reader.ReadLine();
-                            if (line != null)
-                            {
-                                log_feld.Invoke(
-                                    (MethodInvoker)(() =>
-                                        log_feld.AppendText(line + Environment.NewLine)));
-                            }
-                        }
-                    }
-
-                    command.EndExecute(result);
-
-                    client.Disconnect();
-                    if (language_info == "deu")
-                        MessageBox.Show("Wallet installiert.");
-                    else
-                        MessageBox.Show("Wallet installed.");
                 }
 
+                //log vps output 
+                using (var reader =
+                   new StreamReader(command.OutputStream, Encoding.UTF8, true, 1024, true))
+                {
+                    while (!result.IsCompleted || !reader.EndOfStream)
+                    {
+                        string line = reader.ReadLine();
+                        if (line != null)
+                        {
+                            log_feld.Invoke(
+                                (MethodInvoker)(() =>
+                                    log_feld.AppendText(line + Environment.NewLine)));
+                        }
+                    }
+                }
 
-
-
-                //finish
+                command.EndExecute(result);
+                if (language_info == "deu")
+                    MessageBox.Show("Wallet installiert.");
+                else
+                    MessageBox.Show("Wallet installed.");
+                client.Disconnect();
 
             }
         }
@@ -518,7 +394,7 @@ namespace Jumpcoin_install_win
         /// <param name="e"></param>
         private void update_button_Click(object sender, EventArgs e)
         {
-            var version_number = "Version 1.1.0";
+            var version_number = "Version 1.1.1";
             int c;
 
 
@@ -553,14 +429,14 @@ namespace Jumpcoin_install_win
             c = String.Compare(result, version_number);
             if (c == -1)
             {
-                    if (language_info == "deu")
-                        switch (MessageBox.Show("Es ist ein Update verfügbar", "Update", MessageBoxButtons.YesNo))
+                if (language_info == "deu")
+                    switch (MessageBox.Show("Es ist ein Update verfügbar", "Update", MessageBoxButtons.YesNo))
 
-                        {
-                            case DialogResult.Yes: System.Diagnostics.Process.Start("http://jumpcoin.club"); ; break;
-                            case DialogResult.No: break;
-                        }
-                    else
+                    {
+                        case DialogResult.Yes: System.Diagnostics.Process.Start("http://jumpcoin.club"); ; break;
+                        case DialogResult.No: break;
+                    }
+                else
                     switch (MessageBox.Show("There is a update available", "Update", MessageBoxButtons.YesNo))
 
                     {
