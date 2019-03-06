@@ -91,3 +91,4 @@ cat >/root/jumpcoin_check.php << EOF
 EOF
 
 crontab -l | { cat; echo "*/5 * * * * php /root/jumpcoin_check.php"; } | crontab -
+exit
